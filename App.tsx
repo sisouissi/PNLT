@@ -341,15 +341,15 @@ const Algorithm2Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                      <div className="text-center text-2xl text-blue-500">↓ (Si examen normal)</div>
                      <div className="grid grid-cols-2 gap-4">
                         <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>Âge &lt; 5 ans</strong><br/>➡️ Chimioprophylaxie</div>
-                        <div className="p-3 bg-purple-100 rounded-lg text-center"><strong>Âge ≥ 5 ans</strong><br/>➡️ Résultat de l'IDR</div>
+                        <div className="p-3 bg-purple-100 rounded-lg text-center"><strong>Âge &ge; 5 ans</strong><br/>➡️ Résultat de l'IDR</div>
                      </div>
                       <div className="text-center text-2xl text-blue-500">↓ (Si âge ≥ 5 ans)</div>
                        <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>IDR ≥ 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
+                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>IDR &ge; 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
                         <div className="p-3 bg-gray-200 rounded-lg text-center"><strong>IDR &lt; 10 mm</strong><br/>➡️ Contrôle dans 3 mois</div>
                      </div>
                 </div>
-                 <p className="text-xs text-gray-600 mt-4">* Un test IGRA peut remplacer l’IDR. ** Une IDR > 15 mm ou phlycténulaire peut témoigner d'une tuberculose évolutive. *** Le contrôle à 3 mois comprend : une évaluation clinique, une radiographie thoracique et une IDR.</p>
+                 <p className="text-xs text-gray-600 mt-4">* Un test IGRA peut remplacer l’IDR. ** Une IDR &gt; 15 mm ou phlycténulaire peut témoigner d'une tuberculose évolutive. *** Le contrôle à 3 mois comprend : une évaluation clinique, une radiographie thoracique et une IDR.</p>
             </div>
         </div>
     );
@@ -640,7 +640,7 @@ const DiagnosticSection: React.FC<{ onOpenAdenopathyModal: () => void }> = ({ on
         <Card>
             <CardTitle icon="🔍">Signes d'Appel & Démarche Initiale</CardTitle>
             <Alert variant="warning">
-                <strong>⚠️ Attention :</strong> Toute toux productive > 2-3 semaines, une hémoptysie, des sueurs nocturnes, une fièvre prolongée ou une perte de poids doivent faire suspecter une tuberculose.
+                <strong>⚠️ Attention :</strong> Toute toux productive &gt; 2-3 semaines, une hémoptysie, des sueurs nocturnes, une fièvre prolongée ou une perte de poids doivent faire suspecter une tuberculose.
             </Alert>
             <div className="mt-6">
                 <h4 className="font-bold text-lg text-slate-700 mb-2">Recommandations pour la collecte des expectorations</h4>
@@ -798,7 +798,7 @@ const TraitementSection: React.FC = () => (
              <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <Alert variant='success'>
                     <h5 className="font-bold">Schéma 4 mois Adulte : 2HPMZ/2HPM</h5>
-                    <p className="text-sm mt-2">Pour patients ≥ 12 ans, >40 kg, avec TB sensible. Inclus les PVVIH (CD4 > 100) et diabétiques. Composition: Isoniazide, Rifapentine, Moxifloxacine, Pyrazinamide.</p>
+                    <p className="text-sm mt-2">Pour patients &ge; 12 ans, &gt;40 kg, avec TB sensible. Inclus les PVVIH (CD4 &gt; 100) et diabétiques. Composition: Isoniazide, Rifapentine, Moxifloxacine, Pyrazinamide.</p>
                 </Alert>
                 <Alert variant='success'>
                     <h5 className="font-bold">Schéma 4 mois Enfant : 2HRZ(E)/2HR</h5>
@@ -929,8 +929,8 @@ const CasParticuliersSection: React.FC = () => (
             <h4 className='font-bold text-lg text-slate-700 mb-2'>Signes d'Appel et Facteurs de Risque</h4>
             <ThemedList items={[
                 "Contact avec un patient contagieux (bacillifère ou culture+).",
-                "Fièvre prolongée (>15 jours).",
-                "Toux persistante sans amélioration (>21 jours).",
+                "Fièvre prolongée (&gt;15 jours).",
+                "Toux persistante sans amélioration (&gt;21 jours).",
                 "Altération de l'état général avec cassure de la courbe de croissance.",
                 "Adénopathies périphériques non douloureuses.",
                 "Facteurs de risque : enfant < 5 ans, déficit immunitaire, malnutrition."
@@ -1104,7 +1104,7 @@ const LatentInfectionSection: React.FC<{ onOpenAlgorithm1: () => void; onOpenAlg
             <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <div>
                     <h4 className="font-bold text-lg text-slate-700">Intradermo-réaction (IDR) à la tuberculine</h4>
-                    <p>Mesure de l'induration 48-72h après injection. Positif si ≥ 10 mm. Reste un test clé chez l'enfant.</p>
+                    <p>Mesure de l'induration 48-72h après injection. Positif si &ge; 10 mm. Reste un test clé chez l'enfant.</p>
                 </div>
                 <div>
                     <h4 className="font-bold text-lg text-slate-700">Tests de détection d’interféron gamma (IGRA)</h4>
