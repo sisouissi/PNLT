@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { SectionId, NavItem, QuizQuestion } from './types';
-import { NAV_ITEMS, QUIZ_DATA, PRESIDENTE, COORDINATEUR, CONCEPTION_MISE_EN_PAGE, COMITE_LECTURE, COMITE_REDACTION, ABBREVIATIONS } from './constants';
+import { NAV_ITEMS, QUIZ_DATA, PRESIDENTE, COORDINATEUR, CONCEPTION_MISE_EN_PAGE, COMITE_LECTURE, COMITE_REDACTION, ABBREVIATIONS, SEARCH_INDEX } from './constants';
 import { Card, Alert, Icon, CardTitle, StatCard, SymptomCard, FlowStep, ThemedList, TreatmentTable } from './components/common';
 
 // --- Reusable Animated Section Wrapper ---
@@ -26,6 +25,67 @@ const HamburgerIcon: React.FC = () => (
     </svg>
 );
 
+const SearchComponent: React.FC<{ onNavigate: (sectionId: SectionId) => void }> = ({ onNavigate }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [results, setResults] = useState<{ id: SectionId; label: string }[]>([]);
+    const searchRef = useRef<HTMLDivElement>(null);
+
+    const normalizeText = (text: string) => 
+        text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    useEffect(() => {
+        if (searchTerm.length > 2) {
+            const normalizedSearch = normalizeText(searchTerm);
+            const foundResults = SEARCH_INDEX.filter(item => item.content.includes(normalizedSearch));
+            setResults(foundResults);
+        } else {
+            setResults([]);
+        }
+    }, [searchTerm]);
+
+    const handleSelect = (sectionId: SectionId) => {
+        onNavigate(sectionId);
+        setSearchTerm('');
+        setResults([]);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+                setResults([]);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    return (
+        <div className="relative mb-6 w-full max-w-lg mx-auto" ref={searchRef}>
+            <input
+                type="text"
+                placeholder="Rechercher dans le guide (ex: dose, enfant, résistance)..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full p-4 pl-12 border-2 border-gray-300 rounded-full shadow-sm transition-all duration-300 focus:border-red-500 focus:ring-2 focus:ring-red-200"
+            />
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl">🔍</div>
+            {results.length > 0 && (
+                <ul className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-xl z-10 overflow-hidden">
+                    {results.map(result => (
+                        <li 
+                            key={result.id} 
+                            onClick={() => handleSelect(result.id)}
+                            className="p-3 cursor-pointer hover:bg-red-100 transition-colors"
+                        >
+                            {result.label}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+};
+
 const Header: React.FC<{ activeSectionLabel: string; onMenuClick: () => void }> = ({ activeSectionLabel, onMenuClick }) => (
     <div className="sticky top-0 z-30 bg-white/90 backdrop-blur-md p-4 shadow-sm flex items-center md:hidden">
         <button onClick={onMenuClick} className="p-2 mr-4 rounded-md text-gray-700 hover:bg-gray-200 transition-colors">
@@ -46,7 +106,7 @@ const Navigation: React.FC<{
     
     const handleSelect = (sectionId: SectionId) => {
         onSelectSection(sectionId);
-        setIsOpen(false); // Close sidebar on selection
+        setIsOpen(false);
     };
 
     const sidebarContent = (
@@ -95,22 +155,18 @@ const Navigation: React.FC<{
 
     return (
         <>
-            {/* Mobile Sidebar (off-canvas) */}
             <div className={`fixed inset-y-0 left-0 z-50 transform md:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
                 <div className="w-64 h-full bg-[#2c3e50] shadow-2xl">
                     {sidebarContent}
                 </div>
             </div>
             {isOpen && <div className="fixed inset-0 bg-black/60 z-40 md:hidden" onClick={() => setIsOpen(false)}></div>}
-
-            {/* Desktop Sidebar */}
             <aside className="hidden md:block w-64 bg-[#2c3e50] h-screen shadow-lg flex-shrink-0">
                 {sidebarContent}
             </aside>
         </>
     );
 };
-
 
 const FloatingButton: React.FC<{ scrollableRef: React.RefObject<HTMLElement> }> = ({ scrollableRef }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -156,7 +212,7 @@ const CommitteesModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
         >
             <div 
                 className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 md:p-8 relative modal-animate"
-                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+                onClick={(e) => e.stopPropagation()}
             >
                 <button 
                     onClick={onClose}
@@ -165,9 +221,7 @@ const CommitteesModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                 >
                     &times;
                 </button>
-
                 <h2 className="text-3xl font-bold text-center text-[#8b1538] mb-6">Comités du Guide</h2>
-                
                 <div className="space-y-8">
                     <div>
                         <h3 className="text-xl font-semibold text-[#2c3e50] border-b-2 border-red-200 pb-2 mb-4">Présidence et Coordination</h3>
@@ -175,14 +229,12 @@ const CommitteesModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                         <p><strong>Coordinateur du Programme National de Lutte contre la Tuberculose:</strong> {COORDINATEUR}</p>
                          <p><strong>Conception, Mise en page du guide et Développent de l'Application d'Aide au Diagnostic :</strong> {CONCEPTION_MISE_EN_PAGE}</p>
                     </div>
-
                     <div>
                         <h3 className="text-xl font-semibold text-[#2c3e50] border-b-2 border-red-200 pb-2 mb-4">Comité de Rédaction</h3>
                         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-2 text-sm">
                             {COMITE_REDACTION.map(name => <li key={name}>{name}</li>)}
                         </ul>
                     </div>
-                    
                     <div>
                         <h3 className="text-xl font-semibold text-[#2c3e50] border-b-2 border-red-200 pb-2 mb-4">Comité de Lecture</h3>
                         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-2 text-sm">
@@ -214,9 +266,7 @@ const AbbreviationsModal: React.FC<{ isOpen: boolean; onClose: () => void }> = (
                 >
                     &times;
                 </button>
-
                 <h2 className="text-3xl font-bold text-center text-[#2c3e50] mb-6">Abréviations et Acronymes</h2>
-                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-sm">
                     {ABBREVIATIONS.sort((a, b) => a.term.localeCompare(b.term)).map(({ term, definition }) => (
                         <div key={term} className="border-b pb-2">
@@ -340,13 +390,13 @@ const Algorithm2Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                     </div>
                      <div className="text-center text-2xl text-blue-500">↓ (Si examen normal)</div>
                      <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>Âge inférieur à 5 ans</strong><br/>➡️ Chimioprophylaxie</div>
-                        <div className="p-3 bg-purple-100 rounded-lg text-center"><strong>Âge supérieur ou égal à 5 ans</strong><br/>➡️ Résultat de l'IDR</div>
+                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>Âge &lt; 5 ans</strong><br/>➡️ Chimioprophylaxie</div>
+                        <div className="p-3 bg-purple-100 rounded-lg text-center"><strong>Âge &ge; 5 ans</strong><br/>➡️ Résultat de l'IDR</div>
                      </div>
                       <div className="text-center text-2xl text-blue-500">↓ (Si âge ≥ 5 ans)</div>
                        <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>IDR supérieur ou égal à 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
-                        <div className="p-3 bg-gray-200 rounded-lg text-center"><strong>IDR inférieur à 10 mm</strong><br/>➡️ Contrôle dans 3 mois</div>
+                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>IDR &ge; 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
+                        <div className="p-3 bg-gray-200 rounded-lg text-center"><strong>IDR &lt; 10 mm</strong><br/>➡️ Contrôle dans 3 mois</div>
                      </div>
                 </div>
                  <p className="text-xs text-gray-600 mt-4">* Un test IGRA peut remplacer l’IDR. ** Une IDR supérieur à 15 mm ou phlycténulaire peut témoigner d'une tuberculose évolutive. *** Le contrôle à 3 mois comprend : une évaluation clinique, une radiographie thoracique et une IDR.</p>
@@ -421,7 +471,9 @@ const DosageCalculator: React.FC = () => {
 
         let res: React.ReactNode = null;
 
-        if (form === 'hrze') {
+        if (age === 'child' && w < 4) {
+            res = <p>Posologie calculée en fonction du poids</p>;
+        } else if (form === 'hrze') {
             if (age === 'adult') {
                 let tablets;
                 if (w >= 20 && w <= 24) tablets = '1.5';
@@ -431,7 +483,7 @@ const DosageCalculator: React.FC = () => {
                 else if (w > 70) tablets = '4';
                 else tablets = 'Consulter pédiatre';
                 res = <p><strong>HRZE Adulte (75mg+150mg+400mg+275mg):</strong> {tablets} comprimé(s) par jour</p>;
-            } else {
+            } else { // Child >= 4kg
                 let tablets;
                 if (w >= 4 && w <= 7) tablets = '1';
                 else if (w >= 8 && w <= 11) tablets = '2';
@@ -453,7 +505,7 @@ const DosageCalculator: React.FC = () => {
                 else if (w > 70) tablets = '4';
                 else tablets = 'Consulter pédiatre';
                 res = <p><strong>HR Adulte (75mg+150mg):</strong> {tablets} comprimé(s) par jour</p>;
-            } else {
+            } else { // Child >= 4kg
                 let tablets;
                 if (w >= 4 && w <= 7) tablets = '1';
                 else if (w >= 8 && w <= 11) tablets = '2';
@@ -462,7 +514,7 @@ const DosageCalculator: React.FC = () => {
                 else tablets = 'Utiliser posologie adulte';
                 res = <p><strong>HR Enfant (50mg+75mg):</strong> {tablets} comprimé(s) par jour</p>;
             }
-        } else {
+        } else { // Separate forms
             const isoniazideDose = age === 'adult' ? Math.min(Math.round(w * 5), 300) : Math.min(Math.round(w * 10), 300);
             const rifampicineDose = age === 'adult' ? Math.min(Math.round(w * 10), 600) : Math.min(Math.round(w * 15), 600);
             const pyrazinamideDose = age === 'adult' ? Math.round(w * 30) : Math.round(w * 35);
@@ -494,7 +546,7 @@ const DosageCalculator: React.FC = () => {
             <InputGroup label="Âge du patient:">
                 <select value={age} onChange={(e) => setAge(e.target.value as 'adult' | 'child')} className={inputStyles}>
                     <option value="adult">Adulte (≥18 ans)</option>
-                    <option value="child">Enfant (inférieur à 18 ans)</option>
+                    <option value="child">Enfant (&lt;18 ans)</option>
                 </select>
             </InputGroup>
             <InputGroup label="Forme combinée:">
@@ -798,7 +850,7 @@ const TraitementSection: React.FC = () => (
              <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <Alert variant='success'>
                     <h5 className="font-bold">Schéma 4 mois Adulte : 2HPMZ/2HPM</h5>
-                    <p className="text-sm mt-2">Pour patients supérieur ou égal à 12 ans, supérieur à 40 kg, avec TB sensible. Inclus les PVVIH (CD4 supérieur à 100) et diabétiques. Composition: Isoniazide, Rifapentine, Moxifloxacine, Pyrazinamide.</p>
+                    <p className="text-sm mt-2">Pour patients d'âge supérieur ou égal à 12 ans, de poids supérieur à 40 kg, avec TB sensible. Inclus les PVVIH (CD4 supérieur à 100) et diabétiques. Composition: Isoniazide, Rifapentine, Moxifloxacine, Pyrazinamide.</p>
                 </Alert>
                 <Alert variant='success'>
                     <h5 className="font-bold">Schéma 4 mois Enfant : 2HRZ(E)/2HR</h5>
@@ -818,8 +870,8 @@ const TraitementSection: React.FC = () => (
                     <h4 className="font-semibold text-lg text-slate-700">Insuffisance Rénale</h4>
                     <p>L'Isoniazide et la Rifampicine ne nécessitent pas d'ajustement. L'Éthambutol et le Pyrazinamide sont à ajuster :</p>
                      <ul className="list-disc pl-5 mt-2 text-sm">
-                        <li><strong>Clairance inférieur à 50 ml/min :</strong> Éthambutol 15 mg/kg/jour.</li>
-                        <li><strong>Clairance inférieur à 10 ml/min / Hémodialyse :</strong> HR tous les jours. E+Z 1 jour sur 2 (6h après dialyse).</li>
+                        <li><strong>Clairance &lt; 50 ml/min :</strong> Éthambutol 15 mg/kg/jour.</li>
+                        <li><strong>Clairance &lt; 10 ml/min / Hémodialyse :</strong> HR tous les jours. E+Z 1 jour sur 2 (6h après dialyse).</li>
                      </ul>
                  </div>
                  <div className="border-t pt-4">
@@ -923,7 +975,6 @@ const SuiviSection: React.FC = () => (
 
 const CasParticuliersSection: React.FC = () => (
     <SectionWrapper>
-        {/* --- Tuberculose de l'Enfant --- */}
         <Card>
             <CardTitle icon="🧒">Tuberculose de l'Enfant : Démarche Diagnostique</CardTitle>
             <h4 className='font-bold text-lg text-slate-700 mb-2'>Signes d'Appel et Facteurs de Risque</h4>
@@ -970,7 +1021,6 @@ const CasParticuliersSection: React.FC = () => (
              ]}/>
         </Card>
 
-        {/* --- Tuberculose et VIH --- */}
         <Card>
             <CardTitle icon="🔬">Tuberculose et Infection VIH</CardTitle>
             <Alert variant="danger">
@@ -984,7 +1034,7 @@ const CasParticuliersSection: React.FC = () => (
             
             <h4 className='font-bold text-lg text-slate-700 mt-4 mb-2'>Introduction du Traitement Antirétroviral (TAR)</h4>
             <ThemedList items={[
-                <><strong>Hors atteinte méningée :</strong> Si CD4 inférieur à 50/ml, délai de 2 semaines. Si CD4 supérieur à 50/ml, délai de 2 à 4 semaines.</>,
+                <><strong>Hors atteinte méningée :</strong> Si CD4 &lt; 50/ml, délai de 2 semaines. Si CD4 supérieur à 50/ml, délai de 2 à 4 semaines.</>,
                 <><strong>Tuberculose neuro-méningée :</strong> Délai de 4 à 8 semaines après le début du traitement anti-TB.</>
             ]}/>
 
@@ -1104,7 +1154,7 @@ const LatentInfectionSection: React.FC<{ onOpenAlgorithm1: () => void; onOpenAlg
             <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <div>
                     <h4 className="font-bold text-lg text-slate-700">Intradermo-réaction (IDR) à la tuberculine</h4>
-                    <p>Mesure de l'induration 48-72h après injection. Positif si supérieur ou égal à 10 mm. Reste un test clé chez l'enfant.</p>
+                    <p>Mesure de l'induration 48-72h après injection. Positif si &ge; 10 mm. Reste un test clé chez l'enfant.</p>
                 </div>
                 <div>
                     <h4 className="font-bold text-lg text-slate-700">Tests de détection d’interféron gamma (IGRA)</h4>
@@ -1222,6 +1272,12 @@ const App: React.FC = () => {
     const [isAlgorithm3ModalOpen, setIsAlgorithm3ModalOpen] = useState(false);
     const mainScrollRef = useRef<HTMLDivElement>(null);
 
+    const handleSelectSection = (sectionId: SectionId) => {
+        setActiveSection(sectionId);
+        sessionStorage.setItem('lastTbGuideSection', sectionId);
+        mainScrollRef.current?.scrollTo(0, 0);
+    };
+
     const renderSection = () => {
         switch (activeSection) {
             case SectionId.Epidemiologie: return <EpidemiologieSection />;
@@ -1245,12 +1301,6 @@ const App: React.FC = () => {
         }
     }, []);
 
-    const handleSelectSection = (sectionId: SectionId) => {
-        setActiveSection(sectionId);
-        sessionStorage.setItem('lastTbGuideSection', sectionId);
-        mainScrollRef.current?.scrollTo(0, 0);
-    };
-
     const activeNavItem = NAV_ITEMS.find(item => item.id === activeSection);
 
     return (
@@ -1271,6 +1321,7 @@ const App: React.FC = () => {
                 />
                 
                 <main ref={mainScrollRef} className="flex-1 p-4 md:p-10 overflow-y-auto bg-gray-50">
+                    <SearchComponent onNavigate={handleSelectSection} />
                     {renderSection()}
                 </main>
 

@@ -1,4 +1,3 @@
-
 export enum SectionId {
   Epidemiologie = 'epidemiologie',
   Diagnostic = 'diagnostic',
