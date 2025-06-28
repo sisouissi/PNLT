@@ -658,7 +658,7 @@ const DiagnosticSection: React.FC<{ onOpenAdenopathyModal: () => void }> = ({ on
             <CardTitle icon="📸">Imagerie : Radiographie et TDM Thoracique</CardTitle>
             <p>La radiographie du thorax est l'examen de première intention. Elle a une sensibilité de 94% et une spécificité de 89%. Les signes évocateurs sont les micronodules, les nodules excavés et les condensations, particulièrement dans les lobes supérieurs.</p>
             <Alert variant="info" className="mt-4">
-                <strong>Quand utiliser la TDM thoracique ?</strong>
+                <strong>Quand demander un scanner thoracique ?</strong>
                 <ul className="list-disc pl-5 mt-2 text-sm">
                     <li>En cas de discordance radio-clinique (signes cliniques évocateurs mais radio normale).</li>
                     <li>En cas de suspicion de tuberculose pauci-bacillaire (examen direct négatif).</li>
@@ -1273,6 +1273,10 @@ const App: React.FC = () => {
                 <main ref={mainScrollRef} className="flex-1 p-4 md:p-10 overflow-y-auto bg-gray-50">
                     {renderSection()}
                 </main>
+
+                <footer className="p-4 text-center text-xs text-gray-500 bg-gray-100 border-t border-gray-200">
+                    © 2025 Application d'Aide au Diagnostic et Traitement de la tuberculose pulmonaire, développée par Dr Zouhair Souissi.
+                </footer>
             </div>
             
             <FloatingButton scrollableRef={mainScrollRef} />
