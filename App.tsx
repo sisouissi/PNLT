@@ -345,11 +345,11 @@ const Algorithm2Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                      </div>
                       <div className="text-center text-2xl text-blue-500">↓ (Si âge ≥ 5 ans)</div>
                        <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>IDR &ge; 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
-                        <div className="p-3 bg-gray-200 rounded-lg text-center"><strong>IDR &lt; 10 mm</strong><br/>➡️ Contrôle dans 3 mois</div>
+                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>IDR supérieur ou égal à 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
+                        <div className="p-3 bg-gray-200 rounded-lg text-center"><strong>IDR inférieur à 10 mm</strong><br/>➡️ Contrôle dans 3 mois</div>
                      </div>
                 </div>
-                 <p className="text-xs text-gray-600 mt-4">* Un test IGRA peut remplacer l’IDR. ** Une IDR &gt; 15 mm ou phlycténulaire peut témoigner d'une tuberculose évolutive. *** Le contrôle à 3 mois comprend : une évaluation clinique, une radiographie thoracique et une IDR.</p>
+                 <p className="text-xs text-gray-600 mt-4">* Un test IGRA peut remplacer l’IDR. ** Une IDR supérieur à 15 mm ou phlycténulaire peut témoigner d'une tuberculose évolutive. *** Le contrôle à 3 mois comprend : une évaluation clinique, une radiographie thoracique et une IDR.</p>
             </div>
         </div>
     );
