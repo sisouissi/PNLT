@@ -340,16 +340,16 @@ const Algorithm2Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                     </div>
                      <div className="text-center text-2xl text-blue-500">↓ (Si examen normal)</div>
                      <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>Âge &lt; 5 ans</strong><br/>➡️ Chimioprophylaxie</div>
-                        <div className="p-3 bg-purple-100 rounded-lg text-center"><strong>Âge &ge; 5 ans</strong><br/>➡️ Résultat de l'IDR</div>
+                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>Âge inférieur à 5 ans</strong><br/>➡️ Chimioprophylaxie</div>
+                        <div className="p-3 bg-purple-100 rounded-lg text-center"><strong>Âge supérieur ou égal à 5 ans</strong><br/>➡️ Résultat de l'IDR</div>
                      </div>
                       <div className="text-center text-2xl text-blue-500">↓ (Si âge ≥ 5 ans)</div>
                        <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>IDR &ge; 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
-                        <div className="p-3 bg-gray-200 rounded-lg text-center"><strong>IDR &lt; 10 mm</strong><br/>➡️ Contrôle dans 3 mois</div>
+                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>IDR supérieur ou égal à 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
+                        <div className="p-3 bg-gray-200 rounded-lg text-center"><strong>IDR inférieur à 10 mm</strong><br/>➡️ Contrôle dans 3 mois</div>
                      </div>
                 </div>
-                 <p className="text-xs text-gray-600 mt-4">* Un test IGRA peut remplacer l’IDR. ** Une IDR &gt; 15 mm ou phlycténulaire peut témoigner d'une tuberculose évolutive. *** Le contrôle à 3 mois comprend : une évaluation clinique, une radiographie thoracique et une IDR.</p>
+                 <p className="text-xs text-gray-600 mt-4">* Un test IGRA peut remplacer l’IDR. ** Une IDR supérieur à 15 mm ou phlycténulaire peut témoigner d'une tuberculose évolutive. *** Le contrôle à 3 mois comprend : une évaluation clinique, une radiographie thoracique et une IDR.</p>
             </div>
         </div>
     );
@@ -432,16 +432,23 @@ const DosageCalculator: React.FC = () => {
                 else tablets = 'Consulter pédiatre';
                 res = <p><strong>HRZE Adulte (75mg+150mg+400mg+275mg):</strong> {tablets} comprimé(s) par jour</p>;
             } else {
-                let tablets;
-                if (w >= 4 && w <= 7) tablets = '1';
-                else if (w >= 8 && w <= 11) tablets = '2';
-                else if (w >= 12 && w <= 15) tablets = '3';
-                else if (w >= 16 && w <= 24) tablets = '4';
-                else tablets = 'Utiliser posologie adulte';
-                res = <>
-                    <p><strong>HRZ Enfant (50mg+75mg+150mg):</strong> {tablets} comprimé(s) par jour</p>
-                    <p><strong>Éthambutol:</strong> {Math.round(w * 20)} mg/jour (si indiqué)</p>
-                </>;
+                if (w < 4) {
+                     res = <>
+                        <p><strong>HRZ Enfant (50mg+75mg+150mg):</strong> Posologie calculée en fonction du poids</p>
+                        <p><strong>Éthambutol:</strong> {Math.round(w * 20)} mg/jour (si indiqué)</p>
+                    </>;
+                } else {
+                    let tablets;
+                    if (w >= 4 && w <= 7) tablets = '1';
+                    else if (w >= 8 && w <= 11) tablets = '2';
+                    else if (w >= 12 && w <= 15) tablets = '3';
+                    else if (w >= 16 && w <= 24) tablets = '4';
+                    else tablets = 'Utiliser posologie adulte';
+                    res = <>
+                        <p><strong>HRZ Enfant (50mg+75mg+150mg):</strong> {tablets} comprimé(s) par jour</p>
+                        <p><strong>Éthambutol:</strong> {Math.round(w * 20)} mg/jour (si indiqué)</p>
+                    </>;
+                }
             }
         } else if (form === 'hr') {
             if (age === 'adult') {
@@ -454,13 +461,17 @@ const DosageCalculator: React.FC = () => {
                 else tablets = 'Consulter pédiatre';
                 res = <p><strong>HR Adulte (75mg+150mg):</strong> {tablets} comprimé(s) par jour</p>;
             } else {
-                let tablets;
-                if (w >= 4 && w <= 7) tablets = '1';
-                else if (w >= 8 && w <= 11) tablets = '2';
-                else if (w >= 12 && w <= 15) tablets = '3';
-                else if (w >= 16 && w <= 24) tablets = '4';
-                else tablets = 'Utiliser posologie adulte';
-                res = <p><strong>HR Enfant (50mg+75mg):</strong> {tablets} comprimé(s) par jour</p>;
+                if (w < 4) {
+                    res = <p><strong>HR Enfant (50mg+75mg):</strong> Posologie calculée en fonction du poids</p>;
+                } else {
+                    let tablets;
+                    if (w >= 4 && w <= 7) tablets = '1';
+                    else if (w >= 8 && w <= 11) tablets = '2';
+                    else if (w >= 12 && w <= 15) tablets = '3';
+                    else if (w >= 16 && w <= 24) tablets = '4';
+                    else tablets = 'Utiliser posologie adulte';
+                    res = <p><strong>HR Enfant (50mg+75mg):</strong> {tablets} comprimé(s) par jour</p>;
+                }
             }
         } else {
             const isoniazideDose = age === 'adult' ? Math.min(Math.round(w * 5), 300) : Math.min(Math.round(w * 10), 300);
@@ -494,7 +505,7 @@ const DosageCalculator: React.FC = () => {
             <InputGroup label="Âge du patient:">
                 <select value={age} onChange={(e) => setAge(e.target.value as 'adult' | 'child')} className={inputStyles}>
                     <option value="adult">Adulte (≥18 ans)</option>
-                    <option value="child">Enfant (&lt;18 ans)</option>
+                    <option value="child">Enfant (inférieur ou égal à 18 ans)</option>
                 </select>
             </InputGroup>
             <InputGroup label="Forme combinée:">
@@ -640,7 +651,7 @@ const DiagnosticSection: React.FC<{ onOpenAdenopathyModal: () => void }> = ({ on
         <Card>
             <CardTitle icon="🔍">Signes d'Appel & Démarche Initiale</CardTitle>
             <Alert variant="warning">
-                <strong>⚠️ Attention :</strong> Toute toux productive &gt; 2-3 semaines, une hémoptysie, des sueurs nocturnes, une fièvre prolongée ou une perte de poids doivent faire suspecter une tuberculose.
+                <strong>⚠️ Attention :</strong> Toute toux productive supérieure à 2-3 semaines, une hémoptysie, des sueurs nocturnes, une fièvre prolongée ou une perte de poids doivent faire suspecter une tuberculose.
             </Alert>
             <div className="mt-6">
                 <h4 className="font-bold text-lg text-slate-700 mb-2">Recommandations pour la collecte des expectorations</h4>
@@ -798,7 +809,7 @@ const TraitementSection: React.FC = () => (
              <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <Alert variant='success'>
                     <h5 className="font-bold">Schéma 4 mois Adulte : 2HPMZ/2HPM</h5>
-                    <p className="text-sm mt-2">Pour patients &ge; 12 ans, &gt;40 kg, avec TB sensible. Inclus les PVVIH (CD4 &gt; 100) et diabétiques. Composition: Isoniazide, Rifapentine, Moxifloxacine, Pyrazinamide.</p>
+                    <p className="text-sm mt-2">Pour patients d'âge supérieur ou égal à 12 ans, et de poids supérieur à 40 kg, avec TB sensible. Inclus les PVVIH (CD4 supérieur à 100) et diabétiques. Composition: Isoniazide, Rifapentine, Moxifloxacine, Pyrazinamide.</p>
                 </Alert>
                 <Alert variant='success'>
                     <h5 className="font-bold">Schéma 4 mois Enfant : 2HRZ(E)/2HR</h5>
@@ -818,8 +829,8 @@ const TraitementSection: React.FC = () => (
                     <h4 className="font-semibold text-lg text-slate-700">Insuffisance Rénale</h4>
                     <p>L'Isoniazide et la Rifampicine ne nécessitent pas d'ajustement. L'Éthambutol et le Pyrazinamide sont à ajuster :</p>
                      <ul className="list-disc pl-5 mt-2 text-sm">
-                        <li><strong>Clairance &lt; 50 ml/min :</strong> Éthambutol 15 mg/kg/jour.</li>
-                        <li><strong>Clairance &lt; 10 ml/min / Hémodialyse :</strong> HR tous les jours. E+Z 1 jour sur 2 (6h après dialyse).</li>
+                        <li><strong>Clairance inférieur à 50 ml/min :</strong> Éthambutol 15 mg/kg/jour.</li>
+                        <li><strong>Clairance inférieur à 10 ml/min / Hémodialyse :</strong> HR tous les jours. E+Z 1 jour sur 2 (6h après dialyse).</li>
                      </ul>
                  </div>
                  <div className="border-t pt-4">
@@ -929,8 +940,8 @@ const CasParticuliersSection: React.FC = () => (
             <h4 className='font-bold text-lg text-slate-700 mb-2'>Signes d'Appel et Facteurs de Risque</h4>
             <ThemedList items={[
                 "Contact avec un patient contagieux (bacillifère ou culture+).",
-                "Fièvre prolongée (&gt;15 jours).",
-                "Toux persistante sans amélioration (&gt;21 jours).",
+                "Fièvre prolongée (supérieur à 15 jours).",
+                "Toux persistante sans amélioration (supérieur à 21 jours).",
                 "Altération de l'état général avec cassure de la courbe de croissance.",
                 "Adénopathies périphériques non douloureuses.",
                 "Facteurs de risque : enfant < 5 ans, déficit immunitaire, malnutrition."
@@ -984,7 +995,7 @@ const CasParticuliersSection: React.FC = () => (
             
             <h4 className='font-bold text-lg text-slate-700 mt-4 mb-2'>Introduction du Traitement Antirétroviral (TAR)</h4>
             <ThemedList items={[
-                <><strong>Hors atteinte méningée :</strong> Si CD4 &lt; 50/ml, délai de 2 semaines. Si CD4 &gt; 50/ml, délai de 2 à 4 semaines.</>,
+                <><strong>Hors atteinte méningée :</strong> Si CD4 inférieur à 50/ml, délai de 2 semaines. Si CD4 supérieur à 50/ml, délai de 2 à 4 semaines.</>,
                 <><strong>Tuberculose neuro-méningée :</strong> Délai de 4 à 8 semaines après le début du traitement anti-TB.</>
             ]}/>
 
@@ -1104,7 +1115,7 @@ const LatentInfectionSection: React.FC<{ onOpenAlgorithm1: () => void; onOpenAlg
             <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <div>
                     <h4 className="font-bold text-lg text-slate-700">Intradermo-réaction (IDR) à la tuberculine</h4>
-                    <p>Mesure de l'induration 48-72h après injection. Positif si &ge; 10 mm. Reste un test clé chez l'enfant.</p>
+                    <p>Mesure de l'induration 48-72h après injection. Positif si supérieur ou égal à 10 mm. Reste un test clé chez l'enfant.</p>
                 </div>
                 <div>
                     <h4 className="font-bold text-lg text-slate-700">Tests de détection d’interféron gamma (IGRA)</h4>
