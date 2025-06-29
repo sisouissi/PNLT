@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useRef } from 'react';
 import { SectionId, NavItem, QuizQuestion } from './types';
 import { NAV_ITEMS, QUIZ_DATA, PRESIDENTE, COORDINATEUR, CONCEPTION_MISE_EN_PAGE, COMITE_LECTURE, COMITE_REDACTION, ABBREVIATIONS } from './constants';
@@ -171,9 +172,9 @@ const CommitteesModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                 <div className="space-y-8">
                     <div>
                         <h3 className="text-xl font-semibold text-[#2c3e50] border-b-2 border-red-200 pb-2 mb-4">Présidence et Coordination</h3>
-                        <p><strong>Présidente du Comité National de Lutte contre la Tuberculose:</strong> {PRESIDENTE}</p>
-                        <p><strong>Coordinateur du Programme National de Lutte contre la Tuberculose:</strong> {COORDINATEUR}</p>
-                         <p><strong>Conception, Mise en page du guide et Développent de l'Application d'Aide au Diagnostic :</strong> {CONCEPTION_MISE_EN_PAGE}</p>
+                        <p><strong className="font-bold">Présidente du Comité National de Lutte contre la Tuberculose:</strong> {PRESIDENTE}</p>
+                        <p><strong className="font-bold">Coordinateur du Programme National de Lutte contre la Tuberculose:</strong> {COORDINATEUR}</p>
+                         <p><strong className="font-bold">Conception, Mise en page du guide et Développent de l'Application d'Aide au Diagnostic :</strong> {CONCEPTION_MISE_EN_PAGE}</p>
                     </div>
 
                     <div>
@@ -281,7 +282,7 @@ const AdenopathyAlgorithmModal: React.FC<{ isOpen: boolean; onClose: () => void 
                             <div><h4 className="font-bold">Examen Bactériologique</h4><p>ED + PCR (Gene Xpert) + Culture.</p></div>
                         </div>
                         <div className="mt-4 p-3 bg-green-100 border border-green-400 rounded-lg text-center">
-                            <p>Si <strong>Lymphadénite tuberculeuse</strong> confirmée et/ou <strong>examen bactériologique positif</strong> :</p>
+                            <p>Si <strong className="font-bold">Lymphadénite tuberculeuse</strong> confirmée et/ou <strong className="font-bold">examen bactériologique positif</strong> :</p>
                             <div className="mt-2 p-2 bg-green-200 text-green-900 rounded-md text-center font-bold">➡️ TRAITEMENT ANTITUBERCULEUX</div>
                         </div>
                     </div>
@@ -306,15 +307,15 @@ const Algorithm1Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                      <div className="p-3 bg-gray-100 rounded-lg text-center">Examens bactériologiques</div>
                      <div className="text-center text-2xl text-blue-500">↓</div>
                      <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-green-100 rounded-lg text-center"><strong>Positifs</strong><br/>➡️ Tuberculose Traitement</div>
-                        <div className="p-3 bg-yellow-100 rounded-lg text-center"><strong>Négatifs (dont PCR)</strong><br/>➡️ Répéter la radio après traitement antibiotique</div>
+                        <div className="p-3 bg-green-100 rounded-lg text-center"><strong className="font-bold">Positifs</strong><br/>➡️ Tuberculose Traitement</div>
+                        <div className="p-3 bg-yellow-100 rounded-lg text-center"><strong className="font-bold">Négatifs (dont PCR)</strong><br/>➡️ Répéter la radio après traitement antibiotique</div>
                      </div>
                      <div className="text-center text-2xl text-blue-500">↓ (Si persistance des anomalies RX)</div>
                      <div className="p-3 bg-gray-100 rounded-lg text-center">Évaluer le risque d’exposition / Envisager TDM thoracique</div>
                      <div className="text-center text-2xl text-blue-500">↓</div>
                      <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-orange-100 rounded-lg"><strong>Risque important</strong> (Contaminateur proche ou IDR+) et Anomalies suggestives ➡️ Demander un avis spécialisé</div>
-                        <div className="p-3 bg-indigo-100 rounded-lg"><strong>Risque faible</strong> (Pas de contaminateur et IDR-) et Anomalies non suggestives ➡️ Envisager un autre diagnostic</div>
+                        <div className="p-3 bg-orange-100 rounded-lg"><strong className="font-bold">Risque important</strong> (Contaminateur proche ou IDR+) et Anomalies suggestives ➡️ Demander un avis spécialisé</div>
+                        <div className="p-3 bg-indigo-100 rounded-lg"><strong className="font-bold">Risque faible</strong> (Pas de contaminateur et IDR-) et Anomalies non suggestives ➡️ Envisager un autre diagnostic</div>
                      </div>
                 </div>
             </div>
@@ -335,18 +336,18 @@ const Algorithm2Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                     <div className="p-3 bg-gray-100 rounded-lg text-center">Interrogatoire, Examen physique, Radiographie thoracique, IDR</div>
                     <div className="text-center text-2xl text-blue-500">↓</div>
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-red-100 rounded-lg"><strong>Anomalies cliniques/radiologiques</strong><br/>➡️ Suspicion de maladie<br/>➡️ Voir Algorithme 1</div>
-                        <div className="p-3 bg-green-100 rounded-lg"><strong>Examen normal</strong><br/>➡️ Poursuivre selon l'âge</div>
+                        <div className="p-3 bg-red-100 rounded-lg"><strong className="font-bold">Anomalies cliniques/radiologiques</strong><br/>➡️ Suspicion de maladie<br/>➡️ Voir Algorithme 1</div>
+                        <div className="p-3 bg-green-100 rounded-lg"><strong className="font-bold">Examen normal</strong><br/>➡️ Poursuivre selon l'âge</div>
                     </div>
                      <div className="text-center text-2xl text-blue-500">↓ (Si examen normal)</div>
                      <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>Âge inférieur à 5 ans</strong><br/>➡️ Chimioprophylaxie</div>
-                        <div className="p-3 bg-purple-100 rounded-lg text-center"><strong>Âge supérieur ou égal à 5 ans</strong><br/>➡️ Résultat de l'IDR</div>
+                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong className="font-bold">Âge inférieur à 5 ans</strong><br/>➡️ Chimioprophylaxie</div>
+                        <div className="p-3 bg-purple-100 rounded-lg text-center"><strong className="font-bold">Âge supérieur ou égal à 5 ans</strong><br/>➡️ Résultat de l'IDR</div>
                      </div>
                       <div className="text-center text-2xl text-blue-500">↓ (Si âge ≥ 5 ans)</div>
                        <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong>IDR supérieur ou égal à 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
-                        <div className="p-3 bg-gray-200 rounded-lg text-center"><strong>IDR inférieur à 10 mm</strong><br/>➡️ Contrôle dans 3 mois</div>
+                        <div className="p-3 bg-teal-100 rounded-lg text-center"><strong className="font-bold">IDR supérieur ou égal à 10 mm</strong><br/>➡️ Chimioprophylaxie</div>
+                        <div className="p-3 bg-gray-200 rounded-lg text-center"><strong className="font-bold">IDR inférieur à 10 mm</strong><br/>➡️ Contrôle dans 3 mois</div>
                      </div>
                 </div>
                  <p className="text-xs text-gray-600 mt-4">* Un test IGRA peut remplacer l’IDR. ** Une IDR supérieur à 15 mm ou phlycténulaire peut témoigner d'une tuberculose évolutive. *** Le contrôle à 3 mois comprend : une évaluation clinique, une radiographie thoracique et une IDR.</p>
@@ -383,21 +384,21 @@ const Algorithm3Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                         <h3 className="font-bold text-lg text-gray-800">2. Si le patient est asymptomatique (Cas B) :</h3>
                         <ul className="list-disc pl-5 mt-2 space-y-2">
                             <li>
-                                <strong>Si IDR/IGRA est positif :</strong>
+                                <strong className="font-bold">Si IDR/IGRA est positif :</strong>
                                 <ul className="list-['▹'] pl-5 mt-1 space-y-1">
                                     <li>Faire une radiographie thoracique.</li>
-                                    <li>Si la radio montre une <strong>anomalie</strong>, rechercher une TB active (revenir au Cas A).</li>
-                                    <li>Si la radio est <strong>normale</strong>, poser le diagnostic d'ITL et discuter un traitement préventif.</li>
+                                    <li>Si la radio montre une <strong className="font-bold">anomalie</strong>, rechercher une TB active (revenir au Cas A).</li>
+                                    <li>Si la radio est <strong className="font-bold">normale</strong>, poser le diagnostic d'ITL et discuter un traitement préventif.</li>
                                 </ul>
                             </li>
-                            <li><strong>Si IDR/IGRA est négatif** :</strong> Le risque est faible. Mettre en place une surveillance et informer le patient.</li>
+                            <li><strong className="font-bold">Si IDR/IGRA est négatif** :</strong> Le risque est faible. Mettre en place une surveillance et informer le patient.</li>
                         </ul>
                     </div>
                 </div>
                  <div className="text-xs text-gray-600 mt-6 border-t pt-4">
-                    <p><strong>* Symptômes évocateurs :</strong> toux, hémoptysie, fièvre, sueurs nocturnes, perte de poids, etc.</p>
-                    <p><strong>** Surveillance :</strong> Contrôle à 3 mois. Informer le patient de consulter rapidement si des symptômes apparaissent.</p>
-                    <p><strong>*** Envisager de traiter l’ITL</strong> si les examens ont permis d’exclure une tuberculose maladie.</p>
+                    <p><strong className="font-bold">* Symptômes évocateurs :</strong> toux, hémoptysie, fièvre, sueurs nocturnes, perte de poids, etc.</p>
+                    <p><strong className="font-bold">** Surveillance :</strong> Contrôle à 3 mois. Informer le patient de consulter rapidement si des symptômes apparaissent.</p>
+                    <p><strong className="font-bold">*** Envisager de traiter l’ITL</strong> si les examens ont permis d’exclure une tuberculose maladie.</p>
                 </div>
             </div>
         </div>
@@ -430,12 +431,12 @@ const DosageCalculator: React.FC = () => {
                 else if (w >= 56 && w <= 70) tablets = '4';
                 else if (w > 70) tablets = '4';
                 else tablets = 'Consulter pédiatre';
-                res = <p><strong>HRZE Adulte (75mg+150mg+400mg+275mg):</strong> {tablets} comprimé(s) par jour</p>;
+                res = <p><strong className="font-bold">HRZE Adulte (75mg+150mg+400mg+275mg):</strong> {tablets} comprimé(s) par jour</p>;
             } else {
                 if (w < 4) {
                      res = <>
-                        <p><strong>HRZ Enfant (50mg+75mg+150mg):</strong> Posologie calculée en fonction du poids</p>
-                        <p><strong>Éthambutol:</strong> {Math.round(w * 20)} mg/jour (si indiqué)</p>
+                        <p><strong className="font-bold">HRZ Enfant (50mg+75mg+150mg):</strong> Posologie calculée en fonction du poids</p>
+                        <p><strong className="font-bold">Éthambutol:</strong> {Math.round(w * 20)} mg/jour (si indiqué)</p>
                     </>;
                 } else {
                     let tablets;
@@ -445,8 +446,8 @@ const DosageCalculator: React.FC = () => {
                     else if (w >= 16 && w <= 24) tablets = '4';
                     else tablets = 'Utiliser posologie adulte';
                     res = <>
-                        <p><strong>HRZ Enfant (50mg+75mg+150mg):</strong> {tablets} comprimé(s) par jour</p>
-                        <p><strong>Éthambutol:</strong> {Math.round(w * 20)} mg/jour (si indiqué)</p>
+                        <p><strong className="font-bold">HRZ Enfant (50mg+75mg+150mg):</strong> {tablets} comprimé(s) par jour</p>
+                        <p><strong className="font-bold">Éthambutol:</strong> {Math.round(w * 20)} mg/jour (si indiqué)</p>
                     </>;
                 }
             }
@@ -459,10 +460,10 @@ const DosageCalculator: React.FC = () => {
                 else if (w >= 56 && w <= 70) tablets = '4';
                 else if (w > 70) tablets = '4';
                 else tablets = 'Consulter pédiatre';
-                res = <p><strong>HR Adulte (75mg+150mg):</strong> {tablets} comprimé(s) par jour</p>;
+                res = <p><strong className="font-bold">HR Adulte (75mg+150mg):</strong> {tablets} comprimé(s) par jour</p>;
             } else {
                 if (w < 4) {
-                    res = <p><strong>HR Enfant (50mg+75mg):</strong> Posologie calculée en fonction du poids</p>;
+                    res = <p><strong className="font-bold">HR Enfant (50mg+75mg):</strong> Posologie calculée en fonction du poids</p>;
                 } else {
                     let tablets;
                     if (w >= 4 && w <= 7) tablets = '1';
@@ -470,7 +471,7 @@ const DosageCalculator: React.FC = () => {
                     else if (w >= 12 && w <= 15) tablets = '3';
                     else if (w >= 16 && w <= 24) tablets = '4';
                     else tablets = 'Utiliser posologie adulte';
-                    res = <p><strong>HR Enfant (50mg+75mg):</strong> {tablets} comprimé(s) par jour</p>;
+                    res = <p><strong className="font-bold">HR Enfant (50mg+75mg):</strong> {tablets} comprimé(s) par jour</p>;
                 }
             }
         } else {
@@ -479,10 +480,10 @@ const DosageCalculator: React.FC = () => {
             const pyrazinamideDose = age === 'adult' ? Math.round(w * 30) : Math.round(w * 35);
             const ethambutolDose = Math.round(w * 20);
             res = <>
-                <p><strong>Isoniazide:</strong> {isoniazideDose} mg/jour</p>
-                <p><strong>Rifampicine:</strong> {rifampicineDose} mg/jour</p>
-                <p><strong>Pyrazinamide:</strong> {pyrazinamideDose} mg/jour</p>
-                <p><strong>Éthambutol:</strong> {ethambutolDose} mg/jour</p>
+                <p><strong className="font-bold">Isoniazide:</strong> {isoniazideDose} mg/jour</p>
+                <p><strong className="font-bold">Rifampicine:</strong> {rifampicineDose} mg/jour</p>
+                <p><strong className="font-bold">Pyrazinamide:</strong> {pyrazinamideDose} mg/jour</p>
+                <p><strong className="font-bold">Éthambutol:</strong> {ethambutolDose} mg/jour</p>
             </>;
         }
         setResult(res);
@@ -522,7 +523,7 @@ const DosageCalculator: React.FC = () => {
                 <div className="mt-6 p-5 bg-gradient-to-br from-green-100 to-green-200 border-2 border-green-500 rounded-2xl">
                     <h4 className="text-xl font-bold mb-2 text-green-800">💊 Résultats du calcul :</h4>
                     <div className="space-y-1 text-green-900">{result}</div>
-                    <Alert variant="warning" className="mt-4"><strong>Important :</strong> Prendre à jeun, 30 minutes avant le repas. Associer vitamine B6 (pyridoxine) 25-50 mg/jour.</Alert>
+                    <Alert variant="warning" className="mt-4"><strong className="font-bold">Important :</strong> Prendre à jeun, 30 minutes avant le repas. Associer vitamine B6 (pyridoxine) 25-50 mg/jour.</Alert>
                 </div>
             )}
         </div>
@@ -575,7 +576,7 @@ const Quiz: React.FC = () => {
                  <>
                     <Alert variant={score / QUIZ_DATA.length >= 0.8 ? 'success' : score / QUIZ_DATA.length >= 0.6 ? 'warning' : 'danger'}>
                         <h4 className="font-bold text-xl">Résultat Final</h4>
-                        <p><strong>Score : {score}/{QUIZ_DATA.length} ({Math.round((score / QUIZ_DATA.length) * 100)}%)</strong></p>
+                        <p><strong className="font-bold">Score : {score}/{QUIZ_DATA.length} ({Math.round((score / QUIZ_DATA.length) * 100)}%)</strong></p>
                         <p>{score / QUIZ_DATA.length >= 0.8 ? '🎉 Excellent ! Vous maîtrisez bien la prise en charge.' : score / QUIZ_DATA.length >= 0.6 ? '👍 Bien ! Quelques révisions recommandées.' : '📚 Il est recommandé de revoir le guide.'}</p>
                     </Alert>
                     <button onClick={startQuiz} className="mt-4 bg-gradient-to-br from-blue-500 to-indigo-600 text-white py-3 px-8 rounded-full font-bold text-lg hover:-translate-y-1 transition-transform">Recommencer le Quiz</button>
@@ -625,7 +626,7 @@ const EpidemiologieSection: React.FC = () => (
                 <StatCard number="78,9%" label="TB ganglionnaire à M. bovis" />
             </div>
             <Alert variant="info">
-                <strong><Icon>ℹ️</Icon>Points Clés :</strong>
+                <strong className="font-bold"><Icon>ℹ️</Icon>Points Clés :</strong>
                 <ThemedList items={['La Tunisie est un pays à endémicité intermédiaire', 'Stabilité de l\'incidence ces dernières années', 'Impact du COVID-19 : diminution temporaire en 2020-2021', 'Retour aux chiffres habituels en 2022-2023', 'Prédominance des formes ganglionnaires (66,7% des TBEP)']} />
             </Alert>
         </Card>
@@ -639,7 +640,7 @@ const EpidemiologieSection: React.FC = () => (
         </Card>
         <Card>
             <CardTitle icon="🐄">Tuberculose Zoonotique (M. bovis)</CardTitle>
-            <Alert variant="warning"><strong>⚠️ Attention :</strong> M. bovis est responsable de 78,9% des cas de tuberculose ganglionnaire en Tunisie</Alert>
+            <Alert variant="warning"><strong className="font-bold">⚠️ Attention :</strong> M. bovis est responsable de 78,9% des cas de tuberculose ganglionnaire en Tunisie</Alert>
             <p className="font-bold my-3">Prévention :</p>
             <ThemedList items={['Éviter la consommation de produits laitiers non pasteurisés', 'Contrôle vétérinaire du cheptel', 'Pasteurisation systématique du lait', 'Formation des professionnels exposés']} />
         </Card>
@@ -651,7 +652,7 @@ const DiagnosticSection: React.FC<{ onOpenAdenopathyModal: () => void }> = ({ on
         <Card>
             <CardTitle icon="🔍">Signes d'Appel & Démarche Initiale</CardTitle>
             <Alert variant="warning">
-                <strong>⚠️ Attention :</strong> Toute toux productive supérieure à 2-3 semaines, une hémoptysie, des sueurs nocturnes, une fièvre prolongée ou une perte de poids doivent faire suspecter une tuberculose.
+                <strong className="font-bold">⚠️ Attention :</strong> Toute toux productive supérieure à 2-3 semaines, une hémoptysie, des sueurs nocturnes, une fièvre prolongée ou une perte de poids doivent faire suspecter une tuberculose.
             </Alert>
             <div className="mt-6">
                 <h4 className="font-bold text-lg text-slate-700 mb-2">Recommandations pour la collecte des expectorations</h4>
@@ -669,7 +670,7 @@ const DiagnosticSection: React.FC<{ onOpenAdenopathyModal: () => void }> = ({ on
             <CardTitle icon="📸">Imagerie : Radiographie et TDM Thoracique</CardTitle>
             <p>La radiographie du thorax est l'examen de première intention. Elle a une sensibilité de 94% et une spécificité de 89%. Les signes évocateurs sont les micronodules, les nodules excavés et les condensations, particulièrement dans les lobes supérieurs.</p>
             <Alert variant="info" className="mt-4">
-                <strong>Quand demander un scanner thoracique ?</strong>
+                <strong className="font-bold">Quand demander un scanner thoracique ?</strong>
                 <ul className="list-disc pl-5 mt-2 text-sm">
                     <li>En cas de discordance radio-clinique (signes cliniques évocateurs mais radio normale).</li>
                     <li>En cas de suspicion de tuberculose pauci-bacillaire (examen direct négatif).</li>
@@ -688,8 +689,8 @@ const DiagnosticSection: React.FC<{ onOpenAdenopathyModal: () => void }> = ({ on
                 "Lavage broncho-alvéolaire (LBA) et aspiration sous fibroscopie."
             ]}/>
             <h4 className="font-bold text-lg text-slate-700 mt-4 mb-2">Tests Moléculaires et Culture</h4>
-             <p>Le <strong>Gene Xpert MTB/RIF</strong> est un test de première intention. Sa version <strong>Ultra</strong> est plus sensible. Un résultat "Détection de l’ADN à l’état de traces" doit être interprété avec prudence et confirmé par la culture, surtout si le contexte n'est pas celui d'une TB extra-pulmonaire.</p>
-             <p className='mt-2'>La <strong>culture</strong> (sur milieu liquide MGIT ou solide Lowenstein-Jensen) reste le <strong>gold standard</strong> pour la confirmation diagnostique, surtout pour les formes paucibacillaires, et est indispensable pour l'antibiogramme.</p>
+             <p>Le <strong className="font-bold">Gene Xpert MTB/RIF</strong> est un test de première intention. Sa version <strong className="font-bold">Ultra</strong> est plus sensible. Un résultat "Détection de l’ADN à l’état de traces" doit être interprété avec prudence et confirmé par la culture, surtout si le contexte n'est pas celui d'une TB extra-pulmonaire.</p>
+             <p className='mt-2'>La <strong className="font-bold">culture</strong> (sur milieu liquide MGIT ou solide Lowenstein-Jensen) reste le <strong className="font-bold">gold standard</strong> pour la confirmation diagnostique, surtout pour les formes paucibacillaires, et est indispensable pour l'antibiogramme.</p>
         </Card>
 
         <Card>
@@ -698,15 +699,15 @@ const DiagnosticSection: React.FC<{ onOpenAdenopathyModal: () => void }> = ({ on
                  <TreatmentTable
                     headers={['Test', 'Résultat', 'Interprétation et Conduite à Tenir']}
                     rows={[
-                        ['Microscopie', <strong>Positif</strong>, 'Tuberculose très probable. MAMT non exclu.'],
-                        ['Microscopie', <strong>Négatif</strong>, 'TB active possible, surtout si Xpert+ ou Culture+.'],
-                        ['Xpert MTB/RIF', <strong>MTB non détecté</strong>, 'Réaliser un 2ème test si forte suspicion, envisager une culture.'],
-                        ['Xpert MTB/RIF', <strong>MTB détecté, RIF non détectée</strong>, 'TB sensible à la RIF -> Traiter. Réaliser une culture pour tester les autres antituberculeux.'],
-                        ['Xpert MTB/RIF', <strong>MTB détecté, RIF détectée</strong>, 'Évaluer le risque de résistance. Si risque élevé, traiter comme TB-MDR. Si faible, refaire un test. Culture et antibiogramme systématiques.'],
-                        ['Xpert MTB/RIF', <strong>MTB détecté "trace"</strong>, 'Considérer comme positif si TB extra-pulmonaire. Confirmer par culture (milieu liquide).'],
-                        ['Culture', <strong>Positive à M.tuberculosis</strong>, 'TB confirmée. Lancer antibiogramme.'],
-                        ['Culture', <strong>Positive à MAMT</strong>, 'Mycobactériose non tuberculeuse. Confirmer l\'infection.'],
-                        ['Culture', <strong>Négative</strong>, 'Pas de TB si Xpert négatif. Si Xpert positif, considérer comme un faux négatif (patient traité?).']
+                        ['Microscopie', <strong className="font-bold">Positif</strong>, 'Tuberculose très probable. MAMT non exclu.'],
+                        ['Microscopie', <strong className="font-bold">Négatif</strong>, 'TB active possible, surtout si Xpert+ ou Culture+.'],
+                        ['Xpert MTB/RIF', <strong className="font-bold">MTB non détecté</strong>, 'Réaliser un 2ème test si forte suspicion, envisager une culture.'],
+                        ['Xpert MTB/RIF', <strong className="font-bold">MTB détecté, RIF non détectée</strong>, 'TB sensible à la RIF -> Traiter. Réaliser une culture pour tester les autres antituberculeux.'],
+                        ['Xpert MTB/RIF', <strong className="font-bold">MTB détecté, RIF détectée</strong>, 'Évaluer le risque de résistance. Si risque élevé, traiter comme TB-MDR. Si faible, refaire un test. Culture et antibiogramme systématiques.'],
+                        ['Xpert MTB/RIF', <strong className="font-bold">MTB détecté "trace"</strong>, 'Considérer comme positif si TB extra-pulmonaire. Confirmer par culture (milieu liquide).'],
+                        ['Culture', <strong className="font-bold">Positive à M.tuberculosis</strong>, 'TB confirmée. Lancer antibiogramme.'],
+                        ['Culture', <strong className="font-bold">Positive à MAMT</strong>, 'Mycobactériose non tuberculeuse. Confirmer l\'infection.'],
+                        ['Culture', <strong className="font-bold">Négative</strong>, 'Pas de TB si Xpert négatif. Si Xpert positif, considérer comme un faux négatif (patient traité?).']
                     ]}
                  />
             </div>
@@ -719,22 +720,22 @@ const DiagnosticSection: React.FC<{ onOpenAdenopathyModal: () => void }> = ({ on
             <h4 className='font-bold text-lg text-slate-700 mt-4 mb-2'>Tuberculose Ganglionnaire (69% des TBEP en Tunisie)</h4>
             <Alert variant="info">
                 <ul className="list-disc pl-5 mt-2 text-sm">
-                    <li><strong>Clinique :</strong> Tuméfaction cervicale d'apparition lente, souvent peu ou pas douloureuse. Peut fistuliser à la peau.</li>
-                    <li><strong>Suspicion de M. bovis si :</strong> Consommation de lait non pasteurisé, exposition professionnelle (éleveurs, vétérinaires).</li>
-                    <li><strong>Diagnostic :</strong> L'échographie est le premier examen. La confirmation se fait par cytoponction (FNA) ou biopsie exérèse pour examen cytologique, bactériologique (Xpert, culture) et histologique.</li>
+                    <li><strong className="font-bold">Clinique :</strong> Tuméfaction cervicale d'apparition lente, souvent peu ou pas douloureuse. Peut fistuliser à la peau.</li>
+                    <li><strong className="font-bold">Suspicion de M. bovis si :</strong> Consommation de lait non pasteurisé, exposition professionnelle (éleveurs, vétérinaires).</li>
+                    <li><strong className="font-bold">Diagnostic :</strong> L'échographie est le premier examen. La confirmation se fait par cytoponction (FNA) ou biopsie exérèse pour examen cytologique, bactériologique (Xpert, culture) et histologique.</li>
                 </ul>
             </Alert>
 
             <h4 className='font-bold text-lg text-slate-700 mt-6 mb-2'>Autres Formes Fréquentes</h4>
             <div className='space-y-4 text-sm'>
                 <div className='p-3 bg-gray-50 rounded-lg'>
-                    <p><strong>Pleurésie Tuberculeuse :</strong> Liquide pleural jaune citrin, lymphocytaire, exsudatif. La recherche de BK est souvent négative. Le diagnostic est confirmé par la biopsie pleurale (étude histologique et bactériologique).</p>
+                    <p><strong className="font-bold">Pleurésie Tuberculeuse :</strong> Liquide pleural jaune citrin, lymphocytaire, exsudatif. La recherche de BK est souvent négative. Le diagnostic est confirmé par la biopsie pleurale (étude histologique et bactériologique).</p>
                 </div>
                 <div className='p-3 bg-gray-50 rounded-lg'>
-                    <p><strong>Tuberculose Ostéo-articulaire (Mal de Pott) :</strong> L'IRM est l'examen de référence pour l'atteinte rachidienne. La confirmation se fait par biopsie disco-vertébrale pour analyse histologique et bactériologique.</p>
+                    <p><strong className="font-bold">Tuberculose Ostéo-articulaire (Mal de Pott) :</strong> L'IRM est l'examen de référence pour l'atteinte rachidienne. La confirmation se fait par biopsie disco-vertébrale pour analyse histologique et bactériologique.</p>
                 </div>
                 <div className='p-3 bg-gray-50 rounded-lg'>
-                    <p><strong>Méningite Tuberculeuse :</strong> Urgence diagnostique. LCR clair, hypertendu, lymphocytaire avec hypoglycorachie. L'OMS recommande fortement le test Xpert sur le LCR.</p>
+                    <p><strong className="font-bold">Méningite Tuberculeuse :</strong> Urgence diagnostique. LCR clair, hypertendu, lymphocytaire avec hypoglycorachie. L'OMS recommande fortement le test Xpert sur le LCR.</p>
                 </div>
             </div>
 
@@ -780,27 +781,27 @@ const TraitementSection: React.FC = () => (
         <Card>
             <CardTitle icon="🎯">Principes Fondamentaux du Traitement</CardTitle>
             <ThemedList items={[
-                <strong>Traitement sous Observation Directe (TOD) :</strong>,
+                <strong className="font-bold">Traitement sous Observation Directe (TOD) :</strong>,
                 "Essentiel pour garantir l'observance, surtout en phase intensive. Il réduit le risque de résistance et d'échec.",
-                <strong>Vitamine B6 (Pyridoxine) :</strong>,
+                <strong className="font-bold">Vitamine B6 (Pyridoxine) :</strong>,
                 "Association systématique pour prévenir la neuropathie périphérique induite par l'Isoniazide.",
-                <strong>Formes Combinées (ADF) :</strong>,
+                <strong className="font-bold">Formes Combinées (ADF) :</strong>,
                 "À privilégier pour limiter les erreurs de prescription et améliorer l'observance en réduisant le nombre de comprimés."
             ]} />
         </Card>
 
         <Card>
             <CardTitle icon="💊">Schémas Thérapeutiques</CardTitle>
-            <Alert variant="info"><strong>Principe :</strong> Le traitement standard comprend une phase intensive (quadrithérapie) pour réduire rapidement la charge bactérienne, suivie d'une phase d'entretien (bithérapie) pour stériliser les lésions.</Alert>
+            <Alert variant="info"><strong className="font-bold">Principe :</strong> Le traitement standard comprend une phase intensive (quadrithérapie) pour réduire rapidement la charge bactérienne, suivie d'une phase d'entretien (bithérapie) pour stériliser les lésions.</Alert>
             
             <h4 className='font-bold text-xl text-slate-800 mt-6 mb-2'>Schémas Standards (6 à 12 mois)</h4>
             <TreatmentTable
                 headers={['Forme de TB', 'Phase Intensive', 'Phase d\'Entretien', 'Durée Totale']}
                 rows={[
-                    [<strong>TB Pulmonaire</strong>, '2HRZE', '4HR', '6 mois'],
-                    [<><strong>TB Extra-pulmonaire</strong><br/>(pleurale, ganglionnaire)</>, '2HRZE', '4HR', '6 mois'],
-                    [<strong>TB Ostéo-articulaire</strong>, '2HRZE', '7HR', '9 mois'],
-                    [<strong>TB Neuro-méningée</strong>, '2HRZE', '10HR', '12 mois*']
+                    [<strong className="font-bold">TB Pulmonaire</strong>, '2HRZE', '4HR', '6 mois'],
+                    [<><strong className="font-bold">TB Extra-pulmonaire</strong><br/>(pleurale, ganglionnaire)</>, '2HRZE', '4HR', '6 mois'],
+                    [<strong className="font-bold">TB Ostéo-articulaire</strong>, '2HRZE', '7HR', '9 mois'],
+                    [<strong className="font-bold">TB Neuro-méningée</strong>, '2HRZE', '10HR', '12 mois*']
                 ]}
             />
             <p className="text-xs text-gray-600 mt-2">* Associer la pyridoxine (vitamine B6).</p>
@@ -823,19 +824,19 @@ const TraitementSection: React.FC = () => (
              <div className='space-y-4'>
                  <div>
                     <h4 className="font-semibold text-lg text-slate-700">Grossesse et Allaitement</h4>
-                     <p>Le schéma <strong>2HRZE/4HR</strong> est sûr. Ajouter de la Vitamine K au nouveau-né à la naissance (risque hémorragique avec Rifampicine). L'allaitement n'est pas contre-indiqué. La Rifampicine réduit l'efficacité de la contraception orale.</p>
+                     <p>Le schéma <strong className="font-bold">2HRZE/4HR</strong> est sûr. Ajouter de la Vitamine K au nouveau-né à la naissance (risque hémorragique avec Rifampicine). L'allaitement n'est pas contre-indiqué. La Rifampicine réduit l'efficacité de la contraception orale.</p>
                  </div>
                  <div className="border-t pt-4">
                     <h4 className="font-semibold text-lg text-slate-700">Insuffisance Rénale</h4>
                     <p>L'Isoniazide et la Rifampicine ne nécessitent pas d'ajustement. L'Éthambutol et le Pyrazinamide sont à ajuster :</p>
                      <ul className="list-disc pl-5 mt-2 text-sm">
-                        <li><strong>Clairance inférieur à 50 ml/min :</strong> Éthambutol 15 mg/kg/jour.</li>
-                        <li><strong>Clairance inférieur à 10 ml/min / Hémodialyse :</strong> HR tous les jours. E+Z 1 jour sur 2 (6h après dialyse).</li>
+                        <li><strong className="font-bold">Clairance inférieur à 50 ml/min :</strong> Éthambutol 15 mg/kg/jour.</li>
+                        <li><strong className="font-bold">Clairance inférieur à 10 ml/min / Hémodialyse :</strong> HR tous les jours. E+Z 1 jour sur 2 (6h après dialyse).</li>
                      </ul>
                  </div>
                  <div className="border-t pt-4">
                      <h4 className="font-semibold text-lg text-slate-700">Hépatopathie Chronique</h4>
-                     <p>Ne pas utiliser le Pyrazinamide. Le schéma recommandé est <strong>9HRE</strong>. La dose d'Isoniazide peut être ajustée selon le test d'acétylation.</p>
+                     <p>Ne pas utiliser le Pyrazinamide. Le schéma recommandé est <strong className="font-bold">9HRE</strong>. La dose d'Isoniazide peut être ajustée selon le test d'acétylation.</p>
                  </div>
             </div>
         </Card>
@@ -868,10 +869,10 @@ const CalculateurSection: React.FC = () => (
             <TreatmentTable
                 headers={['Médicament', 'Posologie Adulte', 'Posologie Enfant', 'Dose Maximale']}
                 rows={[
-                    [<strong>Isoniazide (H)</strong>, '3-5 mg/kg/j', '10 mg/kg/j', '300 mg/j'],
-                    [<strong>Rifampicine (R)</strong>, '10 mg/kg/j', '15-20 mg/kg/j', '600 mg/j'],
-                    [<strong>Pyrazinamide (Z)</strong>, '30 mg/kg/j', '35 mg/kg/j', '2500 mg/j'],
-                    [<strong>Éthambutol (E)</strong>, '20 mg/kg/j', '20 mg/kg/j', '1600 mg/j']
+                    [<strong className="font-bold">Isoniazide (H)</strong>, '3-5 mg/kg/j', '10 mg/kg/j', '300 mg/j'],
+                    [<strong className="font-bold">Rifampicine (R)</strong>, '10 mg/kg/j', '15-20 mg/kg/j', '600 mg/j'],
+                    [<strong className="font-bold">Pyrazinamide (Z)</strong>, '30 mg/kg/j', '35 mg/kg/j', '2500 mg/j'],
+                    [<strong className="font-bold">Éthambutol (E)</strong>, '20 mg/kg/j', '20 mg/kg/j', '1600 mg/j']
                 ]}
             />
         </Card>
@@ -901,9 +902,9 @@ const SuiviSection: React.FC = () => (
             <CardTitle icon="🔬">Suivi de la TB Pulmonaire à Microscopie Positive</CardTitle>
             <p>L'efficacité du traitement est évaluée par les contrôles bactériologiques aux 2ème, 5ème et 6ème mois.</p>
             <Alert variant="warning" className='mt-4'>
-                <strong>Frotti positif à 2 mois ?</strong> Cela peut être dû à des bacilles morts ou une résolution lente.
+                <strong className="font-bold">Frotti positif à 2 mois ?</strong> Cela peut être dû à des bacilles morts ou une résolution lente.
                 <br/>
-                <strong>Conduite :</strong> Si l'observance thérapeutique est confirmée et en l'absence de résistance (Xpert), poursuivre la phase de continuation. Ne pas prolonger la phase intensive.
+                <strong className="font-bold">Conduite :</strong> Si l'observance thérapeutique est confirmée et en l'absence de résistance (Xpert), poursuivre la phase de continuation. Ne pas prolonger la phase intensive.
             </Alert>
              <p className="font-bold my-3">Raisons possibles d'une mauvaise réponse au traitement :</p>
              <ThemedList items={[
@@ -920,12 +921,12 @@ const SuiviSection: React.FC = () => (
              <TreatmentTable
                 headers={['Résultat', 'Définition']}
                 rows={[
-                    [<strong>Guérison</strong>, 'Patient à frottis positif qui a des frottis négatifs au dernier mois de traitement et au moins une fois auparavant.'],
-                    [<strong>Traitement achevé</strong>, 'Patient qui a achevé le traitement mais ne répond pas aux critères de guérison.'],
-                    [<strong>Échec</strong>, 'Patient présentant des frottis positifs après 5 mois de traitement ou plus.'],
-                    [<strong>Décès</strong>, 'Patient décédé en cours de traitement, quelle que soit la cause.'],
-                    [<strong>Interruption</strong>, 'Patient dont le traitement a été interrompu pendant 2 mois consécutifs ou plus.'],
-                    [<strong>Transfert</strong>, 'Patient transféré vers une autre unité, dont le résultat est inconnu.']
+                    [<strong className="font-bold">Guérison</strong>, 'Patient à frottis positif qui a des frottis négatifs au dernier mois de traitement et au moins une fois auparavant.'],
+                    [<strong className="font-bold">Traitement achevé</strong>, 'Patient qui a achevé le traitement mais ne répond pas aux critères de guérison.'],
+                    [<strong className="font-bold">Échec</strong>, 'Patient présentant des frottis positifs après 5 mois de traitement ou plus.'],
+                    [<strong className="font-bold">Décès</strong>, 'Patient décédé en cours de traitement, quelle que soit la cause.'],
+                    [<strong className="font-bold">Interruption</strong>, 'Patient dont le traitement a été interrompu pendant 2 mois consécutifs ou plus.'],
+                    [<strong className="font-bold">Transfert</strong>, 'Patient transféré vers une autre unité, dont le résultat est inconnu.']
                 ]}
              />
         </Card>
@@ -963,14 +964,14 @@ const CasParticuliersSection: React.FC = () => (
         <Card>
             <CardTitle icon="💊">Tuberculose de l'Enfant : Traitement</CardTitle>
             <Alert variant="info">
-                <strong>Principes :</strong> Traitement de 6 mois pour les formes communes. Les formes sévères nécessitent des schémas prolongés. Les formulations pédiatriques (HRZ) sont privilégiées.
+                <strong className="font-bold">Principes :</strong> Traitement de 6 mois pour les formes communes. Les formes sévères nécessitent des schémas prolongés. Les formulations pédiatriques (HRZ) sont privilégiées.
             </Alert>
             <TreatmentTable
                 headers={['Type de Tuberculose', 'Schéma Thérapeutique']}
                 rows={[
-                    ['Pulmonaire non compliquée / Adénopathies périphériques', <strong>2HRZ / 4HR</strong>],
-                    ['Pulmonaire étendue ou cavitaire', <strong>2HRZ+E / 4HR</strong>],
-                    ['Méningée / Ostéoarticulaire / Disséminée', <strong>2HRZE / 10HR</strong>]
+                    ['Pulmonaire non compliquée / Adénopathies périphériques', <strong className="font-bold">2HRZ / 4HR</strong>],
+                    ['Pulmonaire étendue ou cavitaire', <strong className="font-bold">2HRZ+E / 4HR</strong>],
+                    ['Méningée / Ostéoarticulaire / Disséminée', <strong className="font-bold">2HRZE / 10HR</strong>]
                 ]}
             />
              <h4 className='font-bold text-lg text-slate-700 mt-4 mb-2'>Dépistage de l'Enfant Contact</h4>
@@ -985,7 +986,7 @@ const CasParticuliersSection: React.FC = () => (
         <Card>
             <CardTitle icon="🔬">Tuberculose et Infection VIH</CardTitle>
             <Alert variant="danger">
-                <strong>Principes Fondamentaux :</strong>
+                <strong className="font-bold">Principes Fondamentaux :</strong>
                 <ThemedList items={[
                     'Le traitement antituberculeux doit TOUJOURS être débuté en premier.',
                     'Le délai d\'initiation du traitement antirétroviral (TAR) dépend du taux de CD4.',
@@ -995,17 +996,17 @@ const CasParticuliersSection: React.FC = () => (
             
             <h4 className='font-bold text-lg text-slate-700 mt-4 mb-2'>Introduction du Traitement Antirétroviral (TAR)</h4>
             <ThemedList items={[
-                <><strong>Hors atteinte méningée :</strong> Si CD4 inférieur à 50/ml, délai de 2 semaines. Si CD4 supérieur à 50/ml, délai de 2 à 4 semaines.</>,
-                <><strong>Tuberculose neuro-méningée :</strong> Délai de 4 à 8 semaines après le début du traitement anti-TB.</>
+                <><strong className="font-bold">Hors atteinte méningée :</strong> Si CD4 inférieur à 50/ml, délai de 2 semaines. Si CD4 supérieur à 50/ml, délai de 2 à 4 semaines.</>,
+                <><strong className="font-bold">Tuberculose neuro-méningée :</strong> Délai de 4 à 8 semaines après le début du traitement anti-TB.</>
             ]}/>
 
             <h4 className='font-bold text-lg text-slate-700 mt-4 mb-2'>Choix de la Molécule Antirétrovirale (Interactions avec Rifampicine)</h4>
             <TreatmentTable
                 headers={['Trithérapie Normale', 'Association due à la Rifampicine']}
                 rows={[
-                    ['Acriptega (TDF/Lamivudine/Dolutégravir)', 'Ajouter <strong>Dolutégravir 50 mg/jour</strong>'],
-                    ['Avonza (TDF/Lamivudine/Efavirenz)', 'Ajouter <strong>Efavirenz 200 mg/jour</strong>'],
-                    ['Darunavir/Ritonavir', 'Majorer le <strong>Ritonavir à 300 mg x 2/jour</strong>'],
+                    ['Acriptega (TDF/Lamivudine/Dolutégravir)', 'Ajouter Dolutégravir 50 mg/jour'],
+                    ['Avonza (TDF/Lamivudine/Efavirenz)', 'Ajouter Efavirenz 200 mg/jour'],
+                    ['Darunavir/Ritonavir', 'Majorer le Ritonavir à 300 mg x 2/jour'],
                 ]}
             />
              <h4 className='font-bold text-lg text-slate-700 mt-4 mb-2'>Syndrome de Reconstitution Immunitaire (IRIS)</h4>
@@ -1019,18 +1020,18 @@ const ResistanceSection: React.FC = () => (
         <Card>
             <CardTitle icon="🧬">Définitions Générales de la Résistance</CardTitle>
             <ThemedList items={[
-                <span><strong>TB résistante à la rifampicine (TB-RR) :</strong> Toute résistance à la rifampicine.</span>,
-                <span><strong>TB multirésistante (TB-MR/MDR) :</strong> Résistance à au moins l'isoniazide ET la rifampicine.</span>,
-                <span><strong>TB Pré-ultrarésistante (Pré-XDR) :</strong> TB-MR/RR avec résistance additionnelle à n'importe quelle fluoroquinolone.</span>,
-                <span><strong>TB Ultrarésistante (XDR) :</strong> Pré-XDR avec résistance additionnelle à au moins un autre médicament du groupe A (bédaquiline ou linézolide).</span>,
-                 <span><strong>TB Résistante à l’isoniazide (TB-rH) :</strong> Résistance à l’isoniazide mais souche sensible à la rifampicine.</span>,
+                <span><strong className="font-bold">TB résistante à la rifampicine (TB-RR) :</strong> Toute résistance à la rifampicine.</span>,
+                <span><strong className="font-bold">TB multirésistante (TB-MR/MDR) :</strong> Résistance à au moins l'isoniazide ET la rifampicine.</span>,
+                <span><strong className="font-bold">TB Pré-ultrarésistante (Pré-XDR) :</strong> TB-MR/RR avec résistance additionnelle à n'importe quelle fluoroquinolone.</span>,
+                <span><strong className="font-bold">TB Ultrarésistante (XDR) :</strong> Pré-XDR avec résistance additionnelle à au moins un autre médicament du groupe A (bédaquiline ou linézolide).</span>,
+                 <span><strong className="font-bold">TB Résistante à l’isoniazide (TB-rH) :</strong> Résistance à l’isoniazide mais souche sensible à la rifampicine.</span>,
             ]} />
         </Card>
         
         <Card>
             <CardTitle icon="🧐">Cas Suspects et Groupes à Risque de TB-MR</CardTitle>
              <Alert variant="warning">
-                <strong>Rechercher les facteurs de risque de TB-MR chez :</strong>
+                <strong className="font-bold">Rechercher les facteurs de risque de TB-MR chez :</strong>
                 <ThemedList items={[
                     "Les échecs de traitement, quel que soit le cas de figure.",
                     "Les rechutes et les interruptions de traitement, dont le frottis est positif 3 mois après la reprise.",
@@ -1040,7 +1041,7 @@ const ResistanceSection: React.FC = () => (
                     "Personnes exposées en environnements à haute prévalence de TB-MR (milieu carcéral, etc.)."
                 ]} />
              </Alert>
-            <p className='mt-4'><strong>Conduite :</strong> Tout cas suspect de TB-MR doit faire l’objet d’un test rapide (Xpert MTB/RIF), puis d’une culture et d’un antibiogramme, et être orienté vers un centre spécialisé.</p>
+            <p className='mt-4'><strong className="font-bold">Conduite :</strong> Tout cas suspect de TB-MR doit faire l’objet d’un test rapide (Xpert MTB/RIF), puis d’une culture et d’un antibiogramme, et être orienté vers un centre spécialisé.</p>
         </Card>
 
         <Card>
@@ -1048,9 +1049,9 @@ const ResistanceSection: React.FC = () => (
              <TreatmentTable
                 headers={['Groupe', 'Médicaments', 'Rôle']}
                 rows={[
-                    [<strong>Groupe A</strong>, 'Lévofloxacine/Moxifloxacine, Bédaquiline, Linézolide', 'Trois médicaments à inclure systématiquement.'],
-                    [<strong>Groupe B</strong>, 'Clofazimine, Cyclosérine/Terizidone', 'Un ou deux médicaments à ajouter.'],
-                    [<strong>Groupe C</strong>, 'Éthambutol, Delamanid, Pyrazinamide, Imipénem, Amikacine, etc.', 'À inclure pour compléter le schéma si les agents des groupes A et B ne peuvent pas être utilisés.'],
+                    [<strong className="font-bold">Groupe A</strong>, 'Lévofloxacine/Moxifloxacine, Bédaquiline, Linézolide', 'Trois médicaments à inclure systématiquement.'],
+                    [<strong className="font-bold">Groupe B</strong>, 'Clofazimine, Cyclosérine/Terizidone', 'Un ou deux médicaments à ajouter.'],
+                    [<strong className="font-bold">Groupe C</strong>, 'Éthambutol, Delamanid, Pyrazinamide, Imipénem, Amikacine, etc.', 'À inclure pour compléter le schéma si les agents des groupes A et B ne peuvent pas être utilisés.'],
                 ]}
             />
         </Card>
@@ -1058,7 +1059,7 @@ const ResistanceSection: React.FC = () => (
         <Card>
             <CardTitle icon="📋">Schémas Thérapeutiques de la TB-MR/RR</CardTitle>
              <Alert variant="info">
-                <strong>Messages Clés :</strong>
+                <strong className="font-bold">Messages Clés :</strong>
                 <ThemedList items={[
                    "Le schéma BPaLM/BPaL de 6 mois est le choix privilégié pour les patients > 14 ans.",
                    "Le BDLLfxC de 6 mois est une alternative pour les patients non éligibles au BPaLM (y compris enfants et femmes enceintes).",
@@ -1091,9 +1092,9 @@ const ResistanceSection: React.FC = () => (
             <h4 className='font-bold text-lg mt-6 mb-2 text-slate-700'>Cas particuliers</h4>
              <Alert variant="warning" className="mt-4">
                 <ul className='space-y-3'>
-                    <li><strong>Femme enceinte :</strong> Traitement justifié vu la gravité. Éviter les injectables et l'éthionamide. Les schémas oraux (Bédaquiline, Delamanid, etc.) peuvent être utilisés.</li>
-                    <li><strong>Enfant :</strong> Prise en charge en milieu spécialisé. Les doses sont ajustées au poids.</li>
-                    <li><strong>Personnes avec VIH :</strong> Schéma court oral possible. Attention aux interactions médicamenteuses (ex: ritonavir et bédaquiline).</li>
+                    <li><strong className="font-bold">Femme enceinte :</strong> Traitement justifié vu la gravité. Éviter les injectables et l'éthionamide. Les schémas oraux (Bédaquiline, Delamanid, etc.) peuvent être utilisés.</li>
+                    <li><strong className="font-bold">Enfant :</strong> Prise en charge en milieu spécialisé. Les doses sont ajustées au poids.</li>
+                    <li><strong className="font-bold">Personnes avec VIH :</strong> Schéma court oral possible. Attention aux interactions médicamenteuses (ex: ritonavir et bédaquiline).</li>
                 </ul>
              </Alert>
         </Card>
@@ -1123,7 +1124,7 @@ const LatentInfectionSection: React.FC<{ onOpenAlgorithm1: () => void; onOpenAlg
                 </div>
             </div>
              <Alert variant="warning" className="mt-6">
-                <strong>Limites des tests :</strong> Aucun test ne peut différencier une infection latente d'une maladie active. Un test négatif n'exclut pas une ITL ou une tuberculose maladie.
+                <strong className="font-bold">Limites des tests :</strong> Aucun test ne peut différencier une infection latente d'une maladie active. Un test négatif n'exclut pas une ITL ou une tuberculose maladie.
             </Alert>
         </Card>
          <Card>
@@ -1151,19 +1152,19 @@ const LatentInfectionSection: React.FC<{ onOpenAlgorithm1: () => void; onOpenAlg
                     onClick={onOpenAlgorithm1}
                     className="bg-gradient-to-br from-red-500 to-orange-500 text-white py-3 px-6 rounded-full font-bold hover:-translate-y-0.5 transition-transform w-full sm:w-auto"
                 >
-                    Que faire devant un <strong>enfant suspect</strong> ?
+                    Que faire devant un <strong className="font-bold">enfant suspect</strong> ?
                 </button>
                  <button
                     onClick={onOpenAlgorithm2}
                     className="bg-gradient-to-br from-blue-500 to-indigo-500 text-white py-3 px-6 rounded-full font-bold hover:-translate-y-0.5 transition-transform w-full sm:w-auto"
                 >
-                    Que faire devant un <strong>enfant contact</strong> ?
+                    Que faire devant un <strong className="font-bold">enfant contact</strong> ?
                 </button>
                  <button
                     onClick={onOpenAlgorithm3}
                     className="bg-gradient-to-br from-teal-500 to-cyan-500 text-white py-3 px-6 rounded-full font-bold hover:-translate-y-0.5 transition-transform w-full sm:w-auto"
                 >
-                    Diagnostic de l'ITL chez les <strong>groupes à risque</strong> ?
+                    Diagnostic de l'ITL chez les <strong className="font-bold">groupes à risque</strong> ?
                 </button>
             </div>
         </Card>
@@ -1187,17 +1188,17 @@ const ReferencesSection: React.FC = () => (
             <TreatmentTable
                 headers={['Structure', 'Rôle', 'Contact']}
                 rows={[
-                    [<strong>Comité National de lutte contre la tuberculose</strong>, 'Coordination générale', 'Direction des Soins de Santé de Base'],
-                    [<strong>Service de Pneumologie Pavillon C - Hôpital A. Mami</strong>, 'Service de référence du traitement de la tuberculose résistante', 'Hôpital Abderrahmen Mami Ariana'],
-                    [<strong>Service de Pneumologie</strong>, 'Service de référence du traitement de la tuberculose résistante', 'Hôpital Menzel Bourguiba'],
-                    [<strong>Centre de soins de santé de base CSB local</strong>, 'Prise en charge ambulatoire de la tuberculose', 'Dans chaque région']
+                    [<strong className="font-bold">Comité National de lutte contre la tuberculose</strong>, 'Coordination générale', 'Direction des Soins de Santé de Base'],
+                    [<strong className="font-bold">Service de Pneumologie Pavillon C - Hôpital A. Mami</strong>, 'Service de référence du traitement de la tuberculose résistante', 'Hôpital Abderrahmen Mami Ariana'],
+                    [<strong className="font-bold">Service de Pneumologie</strong>, 'Service de référence du traitement de la tuberculose résistante', 'Hôpital Menzel Bourguiba'],
+                    [<strong className="font-bold">Centre de soins de santé de base CSB local</strong>, 'Prise en charge ambulatoire de la tuberculose', 'Dans chaque région']
                 ]}
             />
         </Card>
         <Card>
             <CardTitle icon="📋">Check-list Diagnostic</CardTitle>
             <Alert variant="info">
-                <strong>✅ Liste de vérification :</strong>
+                <strong className="font-bold">✅ Liste de vérification :</strong>
                 <ul className="list-none space-y-2 mt-2">
                     {[
                         "Anamnèse complète (contage, facteurs de risque)",
@@ -1285,7 +1286,7 @@ const App: React.FC = () => {
                     {renderSection()}
                 </main>
 
-                <footer className="p-4 text-center text-xs text-gray-500 bg-gray-100 border-t border-gray-200">
+                <footer className="p-4 text-center text-sm text-gray-500 bg-gray-100 border-t border-gray-200">
                     © 2025 Application d'Aide au Diagnostic et Traitement de la tuberculose pulmonaire, développée par Dr Zouhair Souissi.
                 </footer>
             </div>
